@@ -20,6 +20,10 @@ jobs:
         run: |
           sudo xcode-select --install || true
 
+      - name: Downgrade project format for Xcode compatibility
+        run: |
+          sed -i '' 's/LastUpgradeCheck = [0-9]*;/LastUpgradeCheck = 76;/' dylinject.xcodeproj/project.pbxproj
+
       - name: Build Dylinject
         run: |
           xcodebuild \
@@ -27,17 +31,3 @@ jobs:
             -scheme dylinject \
             -configuration Release \
             -derivedDataPath build
-
-      - name: Prepare artifact directory
-        run: |
-          mkdir -p release
-
-      - name: Copy built binary
-        run: |
-          cp build/Build/Products/Release/dylinject release/
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dylinject-release
-          path: release/dylinject
