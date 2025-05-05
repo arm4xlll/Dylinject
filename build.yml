@@ -1,0 +1,43 @@
+name: Build Dylinject
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Xcode command-line tools
+        run: |
+          sudo xcode-select --install || true
+
+      - name: Build Dylinject
+        run: |
+          xcodebuild \
+            -project dylinject.xcodeproj \
+            -scheme dylinject \
+            -configuration Release \
+            -derivedDataPath build
+
+      - name: Prepare artifact directory
+        run: |
+          mkdir -p release
+
+      - name: Copy built binary
+        run: |
+          cp build/Build/Products/Release/dylinject release/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dylinject-release
+          path: release/dylinject
