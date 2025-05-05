@@ -23,6 +23,7 @@ jobs:
       - name: Downgrade project format for Xcode compatibility
         run: |
           sed -i '' 's/LastUpgradeCheck = [0-9]*;/LastUpgradeCheck = 76;/' dylinject.xcodeproj/project.pbxproj
+          sed -i '' 's/objectVersion = [0-9]*;/objectVersion = 55;/' dylinject.xcodeproj/project.pbxproj
 
       - name: Build Dylinject
         run: |
