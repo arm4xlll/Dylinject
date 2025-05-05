@@ -37,7 +37,7 @@ jobs:
           cp build/Build/Products/Release/dylinject release/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dylinject-release
           path: release/dylinject
