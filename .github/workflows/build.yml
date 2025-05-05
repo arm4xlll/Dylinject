@@ -41,10 +41,17 @@ jobs:
       - name: Prepare artifact directory
         run: |
           mkdir -p release
-          cp build/Build/Products/Release/dylinject release/
+          # Найти собранный бинарник dylinject
+          BIN_PATH=$(find build -type f -name dylinject -print | head -n1)
+          if [ -z "$BIN_PATH" ]; then
+            echo "Error: dylinject binary not found"
+            exit 1
+          fi
+          echo "Copying $BIN_PATH to release directory"
+          cp "$BIN_PATH" release/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: dylinject-release
           path: release/dylinject
