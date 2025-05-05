@@ -27,8 +27,6 @@ jobs:
           # Replace unsupported file system synchronized group classes
           sed -i '' 's/PBXFileSystemSynchronizedRootGroup/PBXGroup/g' dylinject.xcodeproj/project.pbxproj
 
-      - name: Build Dylinject [0-9]*;/objectVersion = 55;/' dylinject.xcodeproj/project.pbxproj
-
       - name: Build Dylinject
         run: |
           xcodebuild \
