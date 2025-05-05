@@ -24,6 +24,10 @@ jobs:
         run: |
           sed -i '' 's/LastUpgradeCheck = [0-9]*;/LastUpgradeCheck = 76;/' dylinject.xcodeproj/project.pbxproj
           sed -i '' 's/objectVersion = [0-9]*;/objectVersion = 55;/' dylinject.xcodeproj/project.pbxproj
+          # Replace unsupported file system synchronized group classes
+          sed -i '' 's/PBXFileSystemSynchronizedRootGroup/PBXGroup/g' dylinject.xcodeproj/project.pbxproj
+
+      - name: Build Dylinject [0-9]*;/objectVersion = 55;/' dylinject.xcodeproj/project.pbxproj
 
       - name: Build Dylinject
         run: |
