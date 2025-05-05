@@ -38,6 +38,13 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
+      - name: Diagnose build outputs
+        run: |
+          echo "Directory tree under build:"
+          ls -R build || true
+          echo "Found files:"
+          find build -type f | sed 's/^/  /' || true
+
       - name: Prepare artifact directory
         run: |
           mkdir -p release
